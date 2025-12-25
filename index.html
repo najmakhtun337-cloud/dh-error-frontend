@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DH ERROR Bot</title>
+<style>
+body{background:#020617;color:#e5e7eb;font-family:sans-serif}
+.box{width:320px;margin:80px auto;padding:25px;background:#0f172a;border-radius:12px;text-align:center}
+input,button{width:100%;padding:12px;margin-top:10px;border-radius:8px;border:none}
+button{background:#22d3ee;font-weight:bold}
+pre{margin-top:15px}
+</style>
+</head>
+<body>
+
+<div class="box">
+<h2>DH ERROR Bot</h2>
+<p>Enter WhatsApp Number</p>
+<input id="num" placeholder="+91XXXXXXXXXX">
+<button onclick="go()">Get Pair Code</button>
+<pre id="out"></pre>
+</div>
+
+<script>
+async function go(){
+  out.innerText="Please wait...";
+  const r = await fetch("https://dh-error-backend.onrender.com",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({number:num.value})
+  });
+  const d = await r.json();
+  out.innerText = d.ok ? "PAIR CODE: "+d.code : "ERROR";
+}
+</script>
+
+</body>
+</html>
